@@ -35,7 +35,7 @@ class Login extends Component {
         //const password = this.state.password;
         console.log(checkUser.username);
         console.log(checkUser.password);
-        this.props.history.push("/MySite");
+        this.props.history.push('/MySite');
         event.preventDefault();
       }
     

@@ -5,11 +5,11 @@ import Navbar from '../components/Navbar.jsx';
     class MySite extends Component {
         state = {users: []}
       
-        /*componentDidMount() {
+        componentDidMount() {
           fetch('/users')
             .then(res => res.json())
             .then(users => this.setState({ users }));
-        }*/
+        }
       
         render() {
           return (
