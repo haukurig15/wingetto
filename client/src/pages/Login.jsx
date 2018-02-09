@@ -3,12 +3,17 @@ import Navbar from '../components/Navbar.jsx';
 
 
 
+
 class Login extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {username: '', 
                       password: ''};
-    
+
+        this.user = {username: '', 
+        userID: ''};
+
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,12 +35,28 @@ class Login extends Component {
 
         //kalla á server með checkUser
 
+        fetch('/users', {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+            body:  JSON.stringify(checkUser)
+            })
+            .then(res => res.json())
+            .then(res => {this.user = {
+                userID: res.userID,
+                username: "haukur"},console.log(res.userID);});
+        
+            //this.props.history.push('/MySite?ID={res.userID}');
+
 
         //const name = this.state.username;
         //const password = this.state.password;
         console.log(checkUser.username);
         console.log(checkUser.password);
-        this.props.history.push('/MySite');
+        console.log(this.user);
+        
         event.preventDefault();
       }
     
