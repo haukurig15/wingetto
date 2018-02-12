@@ -44,6 +44,7 @@ class Login extends Component {
             try {
               let response = await fetch('/users', {
                 method: "POST",
+                credentials: 'same-origin',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'

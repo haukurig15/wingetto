@@ -22,6 +22,7 @@ router.get('/', function(req, res, next) {
   //res.send('respond with a resource');
   console.log(req.body);
 
+
   // And insert something like this instead:
   res.json({
   	users});
@@ -36,7 +37,6 @@ router.post('/', function(req, res, next) {
   console.log(users[0].username === req.body.username);
   sess=req.session;
   console.log("session: " + sess.id);
-  console.log("cookie: " + sess.cookie.id);
   //console.log("user.a=" + req.session.user);
   //req.session.user = users[0].username;
   //console.log("user.b=" + req.session.user);
