@@ -15,6 +15,7 @@ const users = [{username: "user1",
                   userID: 1,
                   password: "pass4"}];
 
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 	// Comment out this line:
@@ -26,15 +27,19 @@ router.get('/', function(req, res, next) {
   	users});
 });
 
+var sess; 
 router.post('/', function(req, res, next) {
 	// Comment out this line:
   //res.send('respond with a resource');
   console.log(req.body);
   console.log(users);
   console.log(users[0].username === req.body.username);
+  sess=req.session;
+  console.log("session: " + sess.id);
+  console.log("cookie: " + sess.cookie.id);
   //console.log("user.a=" + req.session.user);
-  req.session.user = users[0].username;
-  console.log("user.b=" + req.session.user);
+  //req.session.user = users[0].username;
+  //console.log("user.b=" + req.session.user);
 
   for(let i = 0; i < users.length; i++) {
     if(users[i].username === req.body.username && users[i].password === req.body.password) {
