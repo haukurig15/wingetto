@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var session = require('express-session');
 
 const users = [{username: "user1",
                   userID: 1,
@@ -32,14 +32,22 @@ router.post('/', function(req, res, next) {
   console.log(req.body);
   console.log(users);
   console.log(users[0].username === req.body.username);
+  //console.log("user.a=" + req.session.user);
+  req.session.user = users[0].username;
+  console.log("user.b=" + req.session.user);
 
   for(let i = 0; i < users.length; i++) {
-    if(users[i].username == req.body.username && users[i].password == req.body.password) {
+    if(users[i].username === req.body.username && users[i].password === req.body.password) {
       res.json(users[i]);
       break;
     }
+    else if(i === users.length -1) {
+      console.log("last user")
+      res.json({username: "",
+      userID: 0,
+      password: ""});
+    }
     else {
-      res.json({userID: 0});
       console.log("user er ekki til")
     }
   }
