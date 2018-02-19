@@ -33,14 +33,14 @@ class Login extends Component {
       }
       
     
-      handleSubmit(event) {
+      async handleSubmit(event) {
         //alert('A name was submitted: ' + this.state.value);
         const checkUser = {
             username: this.state.username,
             password: this.state.password
         }
 
-        async function getMoviesFromApi() {
+        async function getUserFromServer() {
             try {
               let response = await fetch('/users', {
                 method: "POST",
@@ -52,14 +52,20 @@ class Login extends Component {
                 body:  JSON.stringify(checkUser)
               });
               let responseJson = await response.json();
+              
               return responseJson;
             } catch (error) {
               console.error(error);
             }
           }
+          this.state.useridfrombacked = await getUserFromServer();
+          console.log(this.state.useridfrombacked);
+          console.log(this.state.useridfrombacked.userID);
+          //this.props.history.push('/MySite');
 
-          if(this.state.useridfrombacked.userID === 1){
+          if(this.state.useridfrombacked.userID === 0){
             //this.props.history.push('/MySite?ID={value}');
+            this.props.history.push('/MySite');
             console.log("notandi fannst");
         }
         else{
@@ -67,19 +73,17 @@ class Login extends Component {
         }
 
 
-          this.state.useridfrombacked = getMoviesFromApi();
-          console.log(this.state.useridfrombacked);
-          event.preventDefault();
+          
         //kalla á server með checkUser
 
-        if(this.state.useridfrombacked.userID === 1){
-            //this.props.history.push('/MySite?ID={value}');
+        if(this.state.useridfrombacked.userID === 0){
+            //this.props.history.push('/MySite');
             console.log("notandi fannst");
         }
         else{
             console.log("notandi fannst ekki");
         }
-        
+        event.preventDefault();
         
        /* fetch('/users', {
             method: "POST",

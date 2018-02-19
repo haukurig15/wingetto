@@ -20,7 +20,10 @@ import Navbar from '../components/Navbar.jsx';
           return (
             <div className="App">
             <Navbar />
-              <h1>Velkominn á þína síða</h1>
+            <h1>Þín síða</h1>
+            {this.state.users.map(user =>
+              <div key={user.userID}>{user.username}</div>
+            )}        
             </div>
           );
         }

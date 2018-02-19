@@ -22,9 +22,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({secret: 'ssshhhhh', resave: false, saveUninitialized: true}));
+app.use(session({secret: 'ssshhhhh', resave: false, saveUninitialized: true, cookie: { maxAge:150000 }}));
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 
 app.use('/', index);
@@ -34,6 +33,7 @@ app.get('/test', function(req, res){
   if(req.session.page_views){
      req.session.page_views++;
      res.send("You visited this page " + req.session.page_views + " times");
+     
   } else {
      req.session.page_views = 1;
      res.send("Welcome to this page for the first time!");
